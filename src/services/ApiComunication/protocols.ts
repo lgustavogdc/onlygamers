@@ -1,36 +1,36 @@
 import { AccountRole } from '../../models/account'
 
-export interface HttpResponse<T> {
+export interface HttpResponse<Body = any> {
   statusCode: number
-  body: T
+  body: Body
 }
 
-export interface HttpRequest<T> {
+export interface HttpRequest<Body = any> {
   headers?: any
   url: string
-  body?: T
+  body?: Body
   query?: any
   params?: any
   accountId?: string
   accountRole?: AccountRole
 }
 
-export interface HttpGet<T> {
-  get: (getParams: Omit<HttpRequest<T>, 'body' | 'accountId' | 'accountRole'>) => Promise<HttpResponse<T>>
+export interface HttpGet<Response> {
+  get: (getParams: Omit<HttpRequest, 'body' | 'accountId' | 'accountRole'>) => Promise<HttpResponse<Response>>
 }
 
-export interface HttpPost<T> {
-  post: (getParams: Omit<HttpRequest<T>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<T>>
+export interface HttpPost<Request, Response> {
+  post: (getParams: Omit<HttpRequest<Request>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<Response>>
 }
 
-export interface HttpDelete<T> {
-  delete: (getParams: Omit<HttpRequest<T>, 'body' | 'accountId' | 'accountRole'>) => Promise<HttpResponse<T>>
+export interface HttpDelete {
+  delete: (getParams: Omit<HttpRequest, 'body' | 'accountId' | 'accountRole'>) => Promise<HttpResponse>
 }
 
-export interface HttpPut<T> {
-  put: (getParams: Omit<HttpRequest<T>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<T>>
+export interface HttpPut<Request, Response> {
+  put: (getParams: Omit<HttpRequest<Request>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<Response>>
 }
 
-export interface HttpPatch<T> {
-  patch: (getParams: Omit<HttpRequest<T>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<T>>
+export interface HttpPatch<Request, Response> {
+  patch: (getParams: Omit<HttpRequest<Request>, 'accountId' | 'accountRole'>) => Promise<HttpResponse<Response>>
 }
